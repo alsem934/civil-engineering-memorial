@@ -19,7 +19,7 @@ const Header = () => {
         </button>
 
         {/* Navigation Links */}
-        <nav className={`md:flex absolute md:static bg-white w-full md:w-auto transition-all duration-300 ease-in-out ${isOpen ? "top-16 left-0 p-4 shadow-lg block" : "hidden md:block"}`}>
+        <nav className={`md:flex absolute md:static bg- w-full md:w-auto transition-all duration-300 ease-in-out ${isOpen ? "top-16 left-0 p-4 shadow-lg block" : "hidden md:block"}`}>
           <ul className="flex flex-col md:flex-row md:space-x-6 space-y-4 md:space-y-0 items-center">
             <li><Link href="/" className="hover:underline" onClick={() => setIsOpen(false)}>Home</Link></li>
             <li><Link href="/memories" className="hover:underline" onClick={() => setIsOpen(false)}>Memories</Link></li>

@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import GridDistortion from "../app/Components/GridDistortion";
 import RotatingText from "../app/Components/RotatingText";
+import { FaGraduationCap } from "react-icons/fa"; // Import graduation cap icon
 
 export default function HomePage() {
   const [daysLeft, setDaysLeft] = useState(0);
-  const graduationDate = new Date("2025-06-15"); // Replace with your graduation date
+  const graduationDate = new Date("2025-06-1"); // Replace with your graduation date
 
   useEffect(() => {
     const calculateDaysLeft = () => {
@@ -25,7 +26,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen flex items-center justify-center relative">
       {/* Background Image Section */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full overflow-hidden h-96 sm:h-full"> {/* Adjust height for mobile */}
         <GridDistortion
           imageSrc="/images/civil.webp" // Update the image source
           grid={10}
@@ -37,9 +38,9 @@ export default function HomePage() {
       </div>
 
       {/* Content Section */}
-      <div className="relative z-10 text-center text-white px-6 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center justify-center w-full">
+      <div className="relative z-10 text-center text-black px-6 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center justify-center w-full">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
             We are Civil Engineers
           </h1>
           <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg" style={{ width: '350px' }}>
@@ -58,16 +59,17 @@ export default function HomePage() {
           </div>
         </div>
 
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-6 text-black">
-          Celebrating the Journey of the Class of 2023
-        </h2>
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 px-4 max-w-2xl text-white-900 mt-6 bg-grey text-blue-900 px-4 py-2 sm:px-6 sm:py-3  font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg text-white">
-          From late-night study sessions to groundbreaking projects, we’ve built more than structures – we’ve built lifelong friendships and unforgettable memories.
-        </p>
-
-        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6">
+        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6 flex items-center justify-center">
+          <FaGraduationCap className="mr-2" /> {/* Add graduation cap icon */}
           {daysLeft > 0 ? `${daysLeft} Days Until Graduation!` : "We Made It!"}
         </div>
+
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-6">
+          Celebrating the Journey of the Class of 2023
+        </h2>
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 px-4 max-w-2xl text-black mt-6 bg-grey px-4 py-2 sm:px-6 sm:py-3 font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg">
+          From late-night study sessions to groundbreaking projects, we’ve built more than structures – we’ve built lifelong friendships and unforgettable memories.
+        </p>
 
         <a
           href="/memories"
