@@ -61,7 +61,7 @@ export default function HomePage() {
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-6 text-black">
           Celebrating the Journey of the Class of 2023
         </h2>
-        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 px-4 max-w-2xl text-gray-900 mt-6 bg-grey text-blue-900 px-4 py-2 sm:px-6 sm:py-3  font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg">
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 px-4 max-w-2xl text-white-900 mt-6 bg-grey text-blue-900 px-4 py-2 sm:px-6 sm:py-3  font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg text-white">
           From late-night study sessions to groundbreaking projects, we’ve built more than structures – we’ve built lifelong friendships and unforgettable memories.
         </p>
 
