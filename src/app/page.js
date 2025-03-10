@@ -1,101 +1,81 @@
-import Image from "next/image";
+"use client"; // Enable client-side interactivity
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import GridDistortion from "../app/Components/GridDistortion";
+import RotatingText from "../app/Components/RotatingText";
+
+export default function HomePage() {
+  const [daysLeft, setDaysLeft] = useState(0);
+  const graduationDate = new Date("2025-06-15"); // Replace with your graduation date
+
+  useEffect(() => {
+    const calculateDaysLeft = () => {
+      const today = new Date();
+      const timeDifference = graduationDate.getTime() - today.getTime();
+      const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+      setDaysLeft(daysDifference);
+    };
+
+    calculateDaysLeft();
+    const interval = setInterval(calculateDaysLeft, 86400000); // Update every 24 hours
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="min-h-screen flex items-center justify-center relative">
+      {/* Background Image Section */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <GridDistortion
+          imageSrc="/images/civil.webp" // Update the image source
+          grid={10}
+          mouse={0.1}
+          strength={0.15}
+          relaxation={0.9}
+          className="custom-class"
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Content Section */}
+      <div className="relative z-10 text-center text-white px-6 sm:px-8 md:px-12 lg:px-20 flex flex-col items-center justify-center w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">
+            We are Civil Engineers
+          </h1>
+          <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg" style={{ width: '350px' }}>
+            <RotatingText
+              texts={["We build houses", "We construct bridges", "We design roads", "We create infrastructure"]}
+              mainClassName="px-2 py-1 sm:px-3 sm:py-2 bg-cyan-300 text-black overflow-hidden justify-center rounded-lg text-lg sm:text-xl md:text-2xl lg:text-3xl"
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-1 sm:pb-2"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={4000}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mt-6 text-black">
+          Celebrating the Journey of the Class of 2023
+        </h2>
+        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 px-4 max-w-2xl text-gray-900 mt-6 bg-grey text-blue-900 px-4 py-2 sm:px-6 sm:py-3  font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg">
+          From late-night study sessions to groundbreaking projects, we’ve built more than structures – we’ve built lifelong friendships and unforgettable memories.
+        </p>
+
+        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-6">
+          {daysLeft > 0 ? `${daysLeft} Days Until Graduation!` : "We Made It!"}
+        </div>
+
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/memories"
+          className="mt-6 bg-white text-blue-900 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-semibold hover:bg-blue-100 transition-colors text-sm sm:text-base md:text-lg"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
+          Explore Our Journey
         </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
